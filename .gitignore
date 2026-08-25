@@ -1,0 +1,44 @@
+# Local datasets
+data/raw/*
+!data/raw/.gitkeep
+*.parquet
+*.csv
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+credentials/
+service-account*.json
+*credentials*.json
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!*.tfvars.example
+
+# dbt generated files
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/profiles.yml
+
+# Kestra local data
+.kestra/
+
+# Editors and operating systems
+.DS_Store
+.vscode/
+.idea/
