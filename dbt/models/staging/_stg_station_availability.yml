@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: stg_station_availability
+    description: >
+      Cleaned and enriched Vélib station snapshots with typed timestamps,
+      availability metrics, operational indicators, and source-quality flags.
+
+    columns:
+      - name: observed_at
+        description: Actual UTC timestamp of the station observation.
+        data_tests:
+          - not_null
+
+      - name: time_bin
+        description: UTC timestamp rounded to a five-minute interval.
+        data_tests:
+          - not_null
+
+      - name: station_id
+        description: Source identifier for the Vélib station.
+        data_tests:
+          - not_null
+
+      - name: station_name
+        description: Display name of the Vélib station.
+        data_tests:
+          - not_null
+
+      - name: status
+        description: Source operational status of the station.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - OK
+                  - CLOSED
+
+      - name: available_bikes
+        description: Total bicycles reported as available.
+
+      - name: available_docks
+        description: Station capacity minus reported available bicycles.
+
+      - name: is_empty
+        description: True when an operational station reports zero available bicycles.
+        data_tests:
+          - not_null
+
+      - name: is_full
+        description: True when an operational station has no available docking capacity.
+        data_tests:
+          - not_null
+
+      - name: is_closed
+        description: True when the source reports the station as closed.
+        data_tests:
+          - not_null
+
+      - name: has_inconsistent_bike_total
+        description: True when mechanical plus electric bicycles differs from total bicycles.
+
+      - name: has_bikes_over_capacity
+        description: True when reported bicycles exceed station capacity.
+
+      - name: has_negative_count
+        description: True when a bicycle or capacity count is negative.

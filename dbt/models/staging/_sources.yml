@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: velib_raw
+    description: Raw Vélib station availability data loaded from GCS.
+    database: paris-velib-de-fs-2026
+    schema: velib_raw
+
+    tables:
+      - name: station_availability
+        description: Five-minute Vélib station snapshots from the source Parquet file.
