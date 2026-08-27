@@ -3,6 +3,7 @@ name = "paris-velib-availability-pipeline"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "google-cloud-bigquery>=3.44.0",
     "google-cloud-storage>=3.13.1",
     "pandas>=3.0.5",
     "pyarrow>=25.0.1",
