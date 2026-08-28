@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: fct_network_hourly
+    description: >
+      Hourly Vélib network performance mart. Each row represents one UTC
+      hour and includes Paris-local calendar fields, station availability
+      indicators, network bicycle totals, and weather conditions.
+
+    columns:
+      - name: hour_start_utc
+        description: UTC timestamp identifying the hourly record.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: hour_start_local
+        description: Corresponding local date and time in Europe/Paris.
+        data_tests:
+          - not_null
+
+      - name: observation_date
+        description: Paris-local calendar date.
+        data_tests:
+          - not_null
+
+      - name: observation_hour
+        description: Paris-local hour from 0 through 23.
+        data_tests:
+          - not_null
+
+      - name: weekday_name
+        description: Paris-local weekday name.
+        data_tests:
+          - not_null
+
+      - name: time_bins_observed
+        description: Number of five-minute source bins represented in the hour.
+        data_tests:
+          - not_null
+
+      - name: availability_issue_rate
+        description: >
+          Proportion of operational station observations that were empty
+          or full during the hour.
+        data_tests:
+          - not_null
