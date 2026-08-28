@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct_station_performance
+    description: >
+      Station-level operational performance mart. Each row represents one
+      Vélib station and summarizes empty, full, closed, quality, and
+      rebalancing indicators across the observed period.
+
+    columns:
+      - name: station_id
+        description: Unique source identifier for the station.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: station_name
+        description: Most recently observed station name.
+        data_tests:
+          - not_null
+
+      - name: total_observations
+        description: Number of source snapshots observed for the station.
+        data_tests:
+          - not_null
+
+      - name: operational_observations
+        description: Number of snapshots where the station status was OK.
+        data_tests:
+          - not_null
+
+      - name: availability_issue_rate
+        description: >
+          Proportion of operational observations where the station was
+          either empty or full.
+
+      - name: rebalancing_priority_score
+        description: >
+          Availability issue rate expressed on a 0–100 scale. Null when a
+          station has no operational observations.
+        
+
+      - name: rebalancing_priority_level
+        description: Rule-based rebalancing category derived from the score.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - HIGH
+                  - MEDIUM
+                  - LOW
+                  - NO_OPERATIONAL_DATA
