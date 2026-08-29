@@ -62,7 +62,10 @@ flowchart TD
 
     H["Terraform"] -. provisions .-> C
     H -. provisions .-> D
+    
     I["Airflow"] -. orchestrates .-> B
+    I -. orchestrates .-> C
+    I -. orchestrates .-> D
     I -. orchestrates .-> E
 ```
 
