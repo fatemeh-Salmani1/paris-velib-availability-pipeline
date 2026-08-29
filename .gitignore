@@ -42,3 +42,10 @@ dbt/profiles.yml
 .DS_Store
 .vscode/
 .idea/
+
+# Airflow local runtime
+orchestration/airflow/.env
+orchestration/airflow/logs/
+orchestration/airflow/config/airflow.cfg
+orchestration/airflow/dags/__pycache__/
+orchestration/airflow/plugins/__pycache__/
