@@ -49,8 +49,6 @@ The dataset includes:
 - Station capacity and operational status
 - Temperature, precipitation and wind speed
 
-The data contains station snapshots rather than individual journeys. Therefore, this project analyses availability patterns and does not attempt to reconstruct bicycle trips.
-
 ## Architecture
 
 ```mermaid
