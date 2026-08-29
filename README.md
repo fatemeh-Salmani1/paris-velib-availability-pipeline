@@ -49,6 +49,8 @@ The dataset includes:
 - Station capacity and operational status
 - Temperature, precipitation and wind speed
 
+The data contains station snapshots rather than individual journeys. Therefore, this project analyses availability patterns and does not attempt to reconstruct bicycle trips.
+
 ## Architecture
 
 ```mermaid
@@ -62,7 +64,6 @@ flowchart TD
 
     H["Terraform"] -. provisions .-> C
     H -. provisions .-> D
-    
     I["Airflow"] -. orchestrates .-> C
     I -. orchestrates .-> D
     I -. orchestrates .-> E
@@ -346,31 +347,32 @@ The Airflow DAG automates these steps as one dependency-controlled workflow.
 
 ## Dashboard
 
-The Looker Studio dashboard will use:
+The Looker Studio dashboard uses:
 
 ```text
 velib_analytics.fct_station_performance
 velib_analytics.fct_network_hourly
 ```
 
-Planned dashboard components include:
+It contains two analytical pages:
 
-- Network availability KPIs
-- Highest-priority rebalancing stations
-- Empty and full station rates
-- Hourly availability patterns
-- Geographic station analysis
-- Weather and availability comparisons
+1. **Station Performance** — identifies stations with the greatest empty/full availability problems and highest rebalancing priority.
+2. **Network Trends & Weather** — shows daily and hourly availability patterns and compares availability issues with temperature and precipitation.
 
-## Current Status
+### Station Performance
 
-- [x] Profile and validate source data
-- [x] Provision GCP infrastructure with Terraform
-- [x] Upload raw data to GCS
-- [x] Load raw data into BigQuery
-- [x] Build dbt staging and analytics models
-- [x] Add automated data-quality tests
-- [x] Orchestrate the pipeline with Airflow
-- [ ] Build the Looker Studio dashboard
-- [ ] Add dashboard screenshots
-- [ ] Complete final project documentation
+![Station performance dashboard](dashboard/station_performance.png)
+
+### Network Trends and Weather
+
+![Network trends and weather dashboard](dashboard/network_trends_weather.png)
+
+### Key Findings
+
+- The network contains 1,503 stations.
+- 122 stations are classified as high rebalancing priority.
+- The average station availability-issue rate is 3.36%.
+- BNF - Bibliothèque Nationale de France has the highest issue rate at 47.58%.
+- Network availability problems increase during daytime and peak around midday.
+- Empty-station problems contribute more than full-station problems during the highest-issue hours.
+- Temperature and precipitation show no clear relationship with availability issues over this short 15-day period.
