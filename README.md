@@ -327,8 +327,8 @@ velib_analytics.fct_network_hourly
 
 It contains two analytical pages:
 
-1. **Station Performance** — identifies stations with the greatest empty/full availability problems and highest rebalancing priority.
-2. **Network Trends & Weather** — shows daily and hourly availability patterns and compares availability issues with temperature and precipitation.
+1. **Station Performance** : identifies stations with the greatest empty/full availability problems and highest rebalancing priority.
+2. **Network Trends & Weather** : shows daily and hourly availability patterns and compares availability issues with temperature and precipitation.
 
 ### Station Performance
 
