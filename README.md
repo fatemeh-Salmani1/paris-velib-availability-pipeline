@@ -49,8 +49,6 @@ The dataset includes:
 - Station capacity and operational status
 - Temperature, precipitation and wind speed
 
-The data contains station snapshots rather than individual journeys. Therefore, this project analyses availability patterns and does not attempt to reconstruct bicycle trips.
-
 ## Architecture
 
 ```mermaid
@@ -317,33 +315,6 @@ uv run python ingestion/load_gcs_to_bigquery.py
 ```
 
 The Airflow DAG automates these steps as one dependency-controlled workflow.
-
-## Repository Structure
-
-```text
-.
-├── dashboard/                 # Dashboard documentation and screenshots
-├── data/raw/                  # Local source data excluded from Git
-├── dbt/
-│   ├── models/staging/        # Cleaned source representation
-│   ├── models/marts/          # Business-facing analytical models
-│   └── tests/                 # Singular dbt tests
-├── docs/                      # Architecture and project documentation
-├── ingestion/                 # GCS and BigQuery ingestion scripts
-├── orchestration/airflow/     # Airflow Docker environment and DAG
-├── terraform/                 # GCP infrastructure as code
-└── tests/                     # Raw BigQuery quality checks
-```
-
-## Security and Cost Controls
-
-- Credentials and local environment files are excluded from Git.
-- Application Default Credentials are mounted read-only in Airflow.
-- The repository is mounted read-only inside Airflow containers.
-- The GCS bucket prevents public access.
-- BigQuery commands use maximum-bytes-billed limits where appropriate.
-- A GCP budget alert monitors project usage.
-- Terraform protects non-empty storage resources from accidental deletion.
 
 ## Dashboard
 
